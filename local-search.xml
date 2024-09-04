@@ -8,7 +8,7 @@
     <link href="/blogs/2024/08/31/page/"/>
     <url>/blogs/2024/08/31/page/</url>
     
-    <content type="html"><![CDATA[page 与 post 到底什么区别？<head>    <script src='//unpkg.com/valine/dist/Valine.min.js'></script></head><body>    <blockquote class="pullquote [class]"><p>应用内容， 到底是干嘛的呢个</p></blockquote>    <div id="vcomments"></div>    <script>        new Valine({            el: '#vcomments',            appId: 'lUE0SbAK6xxwxoftcVRz2spa-MdYXbMMI',            appKey: 'Uic5UN1DVL53rgR1fjbsm0no'        })    </script></body>]]></content>
+    <content type="html"><![CDATA[page 与 post 到底什么区别？<!-- <head>    <script src='//unpkg.com/valine/dist/Valine.min.js'></script></head><body>    <blockquote class="pullquote [class]"><p>应用内容， 到底是干嘛的呢个</p></blockquote>    <div id="vcomments"></div>    <script>        new Valine({            el: '#vcomments',            appId: 'lUE0SbAK6xxwxoftcVRz2spa-MdYXbMMI',            appKey: 'Uic5UN1DVL53rgR1fjbsm0no'        })    </script></body> -->]]></content>
     
     
     
