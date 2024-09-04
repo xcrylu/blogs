@@ -21,7 +21,7 @@
     <link href="/blogs/2024/08/31/test3/"/>
     <url>/blogs/2024/08/31/test3/</url>
     
-    <content type="html"><![CDATA[<h2id="这是第三个公式测试看看好不好用">这是第三个公式测试，看看好不好用</h2><p><span class="math display">\[E=mc^2\]</span></p>]]></content>
+    <content type="html"><![CDATA[<h2id="这是第三个公式测试看看好不好用">这是第三个公式测试，看看好不好用</h2><p><span class="math display">\[E=mc^2\]</span></p><blockquote><p>[!NOTE] Useful information that users should know, even when skimmingcontent.</p></blockquote><blockquote><p>[!TIP] Helpful advice for doing things better or more easily.</p></blockquote><blockquote><p>[!IMPORTANT] Key information users need to know to achieve theirgoal.</p></blockquote><blockquote><p>[!WARNING] Urgent info that needs immediate user attention to avoidproblems.</p></blockquote><blockquote><p>[!CAUTION] Advises about risks or negative outcomes of certainactions.</p></blockquote>]]></content>
     
     
     
@@ -40,7 +40,7 @@
     <link href="/blogs/2024/08/31/test2/"/>
     <url>/blogs/2024/08/31/test2/</url>
     
-    <content type="html"><![CDATA[<h2id="这是第二个公式测试看看好不好用">这是第二个公式测试，看看好不好用</h2><p><span class="math display">\[E=mc^2\]</span></p>]]></content>
+    <content type="html"><![CDATA[<h2id="这是第二个公式测试看看好不好用">这是第二个公式测试，看看好不好用</h2><p><span class="math display">\[E=mc^2\]</span></p><div id="vcomments"></div>]]></content>
     
     
     
