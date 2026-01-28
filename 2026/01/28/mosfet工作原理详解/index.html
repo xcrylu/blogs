@@ -19,21 +19,36 @@
   <meta name="author" content="Belle">
   <meta name="keywords" content="">
   
-    <meta name="description" content="page 与 post 到底什么区别？">
+    <meta name="description" content="MOSFET结构及其工作原理详解 摘自： https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;462392639 ​  MOSFET基本概述 MOSFET由MOS(Metal Oxide Semiconductor金属氧化物半导体)+FET(Field Effect Transistor场效应晶体管)这个两个缩写组成。即通过给金属层(M-金属铝)的栅极和隔着氧化层(O-绝缘层Si">
 <meta property="og:type" content="article">
-<meta property="og:title" content="page">
-<meta property="og:url" content="https://xcrylu.github.io/blogs/2024/08/31/page/index.html">
+<meta property="og:title" content="MOSFET结构及其工作原理详解">
+<meta property="og:url" content="https://xcrylu.github.io/blogs/2026/01/28/mosfet%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="小蜂巢">
-<meta property="og:description" content="page 与 post 到底什么区别？">
+<meta property="og:description" content="MOSFET结构及其工作原理详解 摘自： https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;462392639 ​  MOSFET基本概述 MOSFET由MOS(Metal Oxide Semiconductor金属氧化物半导体)+FET(Field Effect Transistor场效应晶体管)这个两个缩写组成。即通过给金属层(M-金属铝)的栅极和隔着氧化层(O-绝缘层Si">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-31T07:13:15.000Z">
-<meta property="article:modified_time" content="2024-09-04T02:37:56.700Z">
+<meta property="og:image" content="https://pic1.zhimg.com/70/v2-d0dba843b747691404eb4953c51790d6_1440w.avis?source=172ae18b&biz_tag=Post">
+<meta property="og:image" content="https://picx.zhimg.com/v2-320b991f202aa5888a8b929a1c87e30b_1440w.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-b96f1ff5f73a5f98930da1afdb056365_1440w.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-c5633a5d7e5f915ec19724f7d6c9cd70_1440w.jpg">
+<meta property="og:image" content="https://picx.zhimg.com/v2-c653d4b84b983500c8523994b44eebd7_1440w.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-5c496686e686c810d9a799ec94bc00a5_1440w.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-abfc4f6fb1706fc07dc71594492ffa64_1440w.jpg">
+<meta property="og:image" content="https://pica.zhimg.com/v2-17869cb55a7d7d504cbe0a29d3e748ba_1440w.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-004a221cac433f1dd188ee767ad5f199_1440w.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-1ecd64aaf75541a338f9236f0390941d_1440w.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-2ac3ab4b9c6e9404afca7079b75aca37_1440w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-beb0479a664bfb53872f48488cea9488_1440w.jpg">
+<meta property="og:image" content="https://picx.zhimg.com/v2-a6ee12eb3b12939e8abfbcd2a6956b8b_1440w.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-1d55b77b5ced5306520bae023c0fec65_1440w.jpg">
+<meta property="article:published_time" content="2026-01-28T02:46:21.000Z">
+<meta property="article:modified_time" content="2026-01-28T03:34:20.645Z">
 <meta property="article:author" content="Belle">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic1.zhimg.com/70/v2-d0dba843b747691404eb4953c51790d6_1440w.avis?source=172ae18b&biz_tag=Post">
   
   
   
-  <title>page - 小蜂巢</title>
+  <title>MOSFET结构及其工作原理详解 - 小蜂巢</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +214,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="page"></span>
+            <span id="subtitle" data-typed-text="MOSFET结构及其工作原理详解"></span>
           
         </div>
 
@@ -210,8 +225,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-31 15:13" pubdate>
-          2024年8月31日 下午
+        <time datetime="2026-01-28 10:46" pubdate>
+          2026年1月28日 上午
         </time>
       </span>
     
@@ -222,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8 字
+          1.4k 字
         
       </span>
     
@@ -233,7 +248,7 @@
         
         
         
-          1 分钟
+          13 分钟
         
       </span>
     
@@ -270,34 +285,66 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">page</h1>
+            <h1 id="seo-header">MOSFET结构及其工作原理详解</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h1 id="mosfet结构及其工作原理详解">MOSFET结构及其工作原理详解</h1>
+<p><strong>摘自：</strong> https://zhuanlan.zhihu.com/p/462392639 ​</p>
+<p><img src="https://pic1.zhimg.com/70/v2-d0dba843b747691404eb4953c51790d6_1440w.avis?source=172ae18b&biz_tag=Post" srcset="/blogs/img/loading.gif" lazyload alt="半导体结构示意图"></p>
+<h2 id="mosfet基本概述">MOSFET基本概述</h2>
+<p>MOSFET由MOS(Metal Oxide Semiconductor金属氧化物半导体)+FET(Field
+Effect
+Transistor场效应晶体管)这个两个缩写组成。即通过给金属层(M-金属铝)的栅极和隔着氧化层(O-绝缘层SiO2)的源极施加电压，产生电场的效应来控制半导体(S)导电沟道开关的场效应晶体管。由于栅极与源极、栅极与漏极之间均采用SiO2绝缘层隔离，MOSFET因此又被称为绝缘栅型场效应管。</p>
+<p>市面上大家所说的功率场效应晶体管通常指绝缘栅MOS型(Metal Oxide
+Semiconductor FET),简称功率MOSFET(Power
+MOSFET)。实际上场效应管分为结型和绝缘栅两种不同的结构。场效应管是利用输入回路的电场效应来控制输出回路电流的一种半导体器件。它仅靠半导体中的多数载流子导电，又称为单极型晶体管。结型功率场效应晶体管一般称作静电感应晶体管(Static
+Induction
+Transistor-SIT)。其特点是用栅极电压来控制漏极电流，驱动电路简单，需要的驱动功率小，开关速度快，工作频率高，热稳定性优于GTR，但其电流容量小，耐压低，一般只适用于功率不超过10kW的电力电子装置。MOSFET功率场效应晶体管，大多数用作开关和驱动器，工作于开关状态，耐压从几十伏到上千伏，工作电流可达几安培到几十安。功率MOSFET基本上都是增强型MOSFET，它具有优良的开关特性。</p>
+<h2 id="mosfet的分类">MOSFET的分类</h2>
+<p>MOSFET的种类：按导电沟道类型可分为P沟道和N沟道。按栅极电压幅值可分为：耗尽型-当栅极电压为零时漏源极之间就存在导电沟道；增强型-对于N(P)沟道器件，栅极电压大于(小于)零时才存在导电沟道，功率MOSFET主要是N沟道增强型。</p>
+<p><img src="https://picx.zhimg.com/v2-320b991f202aa5888a8b929a1c87e30b_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N 沟道增强型MOSFET结构和电器符号"></p>
+<p><img src="https://pic2.zhimg.com/v2-b96f1ff5f73a5f98930da1afdb056365_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道耗尽型MOSFET结构和电器符号"></p>
+<p><img src="https://pic3.zhimg.com/v2-c5633a5d7e5f915ec19724f7d6c9cd70_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="P沟道增强型MOSFET结构和电器符号"></p>
+<p><img src="https://picx.zhimg.com/v2-c653d4b84b983500c8523994b44eebd7_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="P沟道耗尽型MOSFET结构和电器符号"></p>
+<h2
+id="mos管结构原理图解以n沟道增强型为例">MOS管结构原理图解(以N沟道增强型为例)</h2>
+<p>N沟道增强型MOS管结构如图5所示。它以一块低掺杂的P型硅片为衬底，利用扩散工艺制作两个高掺杂的N+区，并引入两个电极分别为源极S(Source)和漏极D(Drain),半导体上制作一层SiO2绝缘层，再在SiO2上面制作一层金属铝Al，引出电极，作为栅极G(Gate)。通常将衬底与源极接在一起使用。这样，栅极和衬底各相当于一个极板，中间是绝缘层，形成电容。当栅-源电压变化时，将改变衬底靠近绝缘层处感应电荷的多少，从而控制漏极电流的大小。</p>
+<p><img src="https://pic4.zhimg.com/v2-5c496686e686c810d9a799ec94bc00a5_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET原理图"></p>
+<h2
+id="mos管工作原理详解n沟道增强型为例">MOS管工作原理详解(N沟道增强型为例)</h2>
+<ul>
+<li><p>当栅-源之间不加电压时即<strong>VGS=0</strong>时，源漏之间是<strong>两只背向的PN结</strong>。不管VDS极性如何，其中总有<strong>一个PN结反偏</strong>，所以<strong>不存在</strong>导电沟道。</p></li>
+<li><p>当<strong>UDS=0且UGS&gt;0</strong>时，由于<span
+class="math inline">\(SiO_2\)</span>的存在，栅极<strong>电流为零</strong>。但是栅极金属层将<strong>聚集正电荷</strong>．它们<strong>排斥</strong>P型衬底靠近
+SiO2一侧的<strong>空穴</strong>，使之剩下不能移动的<strong>负离子区</strong>，形成<strong>耗尽层</strong>，如图6所示
+<img src="https://pic3.zhimg.com/v2-abfc4f6fb1706fc07dc71594492ffa64_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET原理图"></p></li>
+<li><p>当<strong>UGS增大</strong>时，一方面<strong>耗尽层增宽</strong>，另一方面将衬底的<strong>自由电子</strong>吸引到<strong>耗尽层与绝缘层之间</strong>，形成一个<strong>N型薄层</strong>，称为<strong>反型层</strong>，如图7所示。这个反型层就构成了漏-源之间的<strong>导电沟道</strong>。使沟道刚刚形成的栅-源电压称为<strong>开启电压UGS(th)/VT</strong>。<strong>UGS电压越大</strong>，形成的<strong>反层型越厚</strong>，导电沟道<strong>电阻越小</strong>。</p></li>
+</ul>
+<p><img src="https://pica.zhimg.com/v2-17869cb55a7d7d504cbe0a29d3e748ba_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET原理图"></p>
+<ul>
+<li>当<strong>VGS&gt;VT且VDS较小</strong>时，基本MOS结构的示意图如图8-1所示。图中反型沟道层的厚度定性地表明了<strong>相对电荷密度</strong>，这时的相对电荷密度在沟道长度方向上为一<strong>常数</strong>。相应的ID-VDS特性曲线如图8-1所示。</li>
+</ul>
+<p><img src="https://pic4.zhimg.com/v2-004a221cac433f1dd188ee767ad5f199_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET原理图"></p>
+<ul>
+<li>当<strong>VGS&gt;VT且VDS增大</strong>时，由于<strong>漏电压增大</strong>，<strong>漏端附近的氧化层压降减小</strong>，这意味着漏端附近的<strong>反型层电荷密度</strong>也将<strong>减小</strong>。漏端的<strong>沟道电导减小</strong>，从而ID-VDS特性曲线的<strong>斜率减小</strong>，如图8-2所示。</li>
+</ul>
+<p><img src="https://pic4.zhimg.com/v2-1ecd64aaf75541a338f9236f0390941d_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道耗尽型MOSFET原理图"></p>
+<ul>
+<li>当<strong>VGS&gt;VT且VDS增大</strong>到漏端的<strong>氧化层压降等于VT</strong>时，<strong>漏极</strong>处的反型层<strong>电荷密度为零</strong>，此时漏极处的<strong>电导为零</strong>，这意味着ID-VDS的特性曲线的<strong>斜率为零</strong>,称为<strong>预夹断</strong>，如图8-3所示。</li>
+</ul>
+<p><img src="https://pic4.zhimg.com/v2-2ac3ab4b9c6e9404afca7079b75aca37_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET原理图"></p>
+<ul>
+<li>当<strong>VGS&gt;VT且VDS&gt;VDS(sat)</strong>时，沟道中反型电荷为零的点移向源端。如果UDS继续<strong>增大</strong>，夹断区随之<strong>延长</strong>，如图所示，而且<strong>UDS的增大</strong>部分几乎全部用于<strong>克服</strong>夹断区对<strong>漏极电流的阻力</strong>，漏电流<strong>ID为一常数</strong>，这种情形在ID-VDS对应于<strong>饱和区(恒流区)</strong>，如图8-4所示。</li>
+</ul>
+<p><img src="https://pic1.zhimg.com/v2-beb0479a664bfb53872f48488cea9488_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET原理图"></p>
+<h2 id="mosfet的特性曲线">MOSFET的特性曲线</h2>
+<p>漏极电流ID和栅源间电压UGS的关系称为MOSFET的转移特性。ID较大时，ID与UGS的关系近似线性，曲线的斜率定义为跨导Gfs。图中随着VGS增大，ID的斜率增大。原因是由于VGS增大，形成的反层型越厚，导通沟道电阻越小，ID的增长速度越快。MOSFET有三个工作区域：截止区、饱和区和非饱和区，对应的输出特性曲线如图10所示。若电力
+MOSFET工作在开关状态，即在截止区和非饱和区之间来回转换。</p>
+<p><img src="https://picx.zhimg.com/v2-a6ee12eb3b12939e8abfbcd2a6956b8b_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET Id-Vss 转移特性曲线"></p>
+<p><img src="https://pic2.zhimg.com/v2-1d55b77b5ced5306520bae023c0fec65_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET Id-V_DS 输出特性曲线"></p>
 
-page 与 post 到底什么区别？
-
-
-
-<!-- <head>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-</head>
-<body>
-
-    <blockquote class="pullquote [class]"><p>应用内容， 到底是干嘛的呢个</p>
-</blockquote>
-
-    <div id="vcomments"></div>
-    <script>
-        new Valine({
-            el: '#vcomments',
-            appId: 'lUE0SbAK6xxwxoftcVRz2spa-MdYXbMMI',
-            appKey: 'Uic5UN1DVL53rgR1fjbsm0no'
-        })
-    </script>
-</body> -->
                 
               </div>
             
@@ -314,8 +361,8 @@ page 与 post 到底什么区别？
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>page</div>
-      <div>https://xcrylu.github.io/blogs/2024/08/31/page/</div>
+      <div>MOSFET结构及其工作原理详解</div>
+      <div>https://xcrylu.github.io/blogs/2026/01/28/mosfet工作原理详解/</div>
     </div>
     <div class="license-meta">
       
@@ -327,7 +374,7 @@ page 与 post 到底什么区别？
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月31日</div>
+          <div>2026年1月28日</div>
         </div>
       
       
@@ -359,18 +406,12 @@ page 与 post 到底什么区别？
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blogs/2026/01/28/mosfet%E4%BB%8B%E7%BB%8D/" title="MOSFET结构及其工作原理详解">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MOSFET结构及其工作原理详解</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blogs/2024/08/31/test3/" title="test3">
-                        <span class="hidden-mobile">test3</span>
+                      <a href="/blogs/2024/08/30/Hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B7%BB%E5%8A%A0%E6%96%87%E6%A1%A3/" title="Hexo个人博客系统安装配置和添加文档">
+                        <span class="hidden-mobile">Hexo个人博客系统安装配置和添加文档</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
