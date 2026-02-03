@@ -8,7 +8,7 @@
     <link href="/blogs/2026/02/03/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/"/>
     <url>/blogs/2026/02/03/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/</url>
     
-    <content type="html"><![CDATA[<h3 id="图片测试">图片测试</h3><h2 id="图片一">图片一</h2><figure><img src="图片测试/03e5fb48e15ed8e3c033b70175abdb23.png" alt="图像一" /><figcaption aria-hidden="true">图像一</figcaption></figure><h2 id="图片二">图片二</h2><figure><img src="图片测试/5b14a54d093b9df9954522a4d51f5c42.png" alt="图像二" /><figcaption aria-hidden="true">图像二</figcaption></figure>]]></content>
+    <content type="html"><![CDATA[<h3 id="图片测试">图片测试</h3><h2 id="图片一">图片一</h2><figure><img src="\img\03e5fb48e15ed8e3c033b70175abdb23.png" alt="图像一" /><figcaption aria-hidden="true">图像一</figcaption></figure><h2 id="图片二">图片二</h2><figure><img src="图片测试/5b14a54d093b9df9954522a4d51f5c42.png" alt="图像二" /><figcaption aria-hidden="true">图像二</figcaption></figure>]]></content>
     
     
     
