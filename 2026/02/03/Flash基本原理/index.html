@@ -19,36 +19,46 @@
   <meta name="author" content="Belle">
   <meta name="keywords" content="">
   
-    <meta name="description" content="MOSFET结构及其工作原理详解 摘自： https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;462392639 ​  MOSFET基本概述 MOSFET由MOS(Metal Oxide Semiconductor金属氧化物半导体)+FET(Field Effect Transistor场效应晶体管)这个两个缩写组成。即通过给金属层(M-金属铝)的栅极和隔着氧化层(O-绝缘层Si">
+    <meta name="description" content="Flash(NandFlash &amp; NorFlash) 基本原理 — 整理与改写  引用来源：AMDDMA，原文链接：https:&#x2F;&#x2F;blog.csdn.net&#x2F;AMDDMA&#x2F;article&#x2F;details&#x2F;99349860 说明：本文为对原文的整理与改写，保留原文的标题层次并列出可获取的图片链接与参考资料；正文为改写版以避免逐字复制。   一、Flash 基本原理及分类 1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MOSFET结构及其工作原理详解">
-<meta property="og:url" content="https://xcrylu.github.io/blogs/2026/01/28/mosfet%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:title" content="Flash基本原理">
+<meta property="og:url" content="https://xcrylu.github.io/blogs/2026/02/03/Flash%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="小蜂巢">
-<meta property="og:description" content="MOSFET结构及其工作原理详解 摘自： https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;462392639 ​  MOSFET基本概述 MOSFET由MOS(Metal Oxide Semiconductor金属氧化物半导体)+FET(Field Effect Transistor场效应晶体管)这个两个缩写组成。即通过给金属层(M-金属铝)的栅极和隔着氧化层(O-绝缘层Si">
+<meta property="og:description" content="Flash(NandFlash &amp; NorFlash) 基本原理 — 整理与改写  引用来源：AMDDMA，原文链接：https:&#x2F;&#x2F;blog.csdn.net&#x2F;AMDDMA&#x2F;article&#x2F;details&#x2F;99349860 说明：本文为对原文的整理与改写，保留原文的标题层次并列出可获取的图片链接与参考资料；正文为改写版以避免逐字复制。   一、Flash 基本原理及分类 1">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic1.zhimg.com/70/v2-d0dba843b747691404eb4953c51790d6_1440w.avis?source=172ae18b&biz_tag=Post">
-<meta property="og:image" content="https://picx.zhimg.com/v2-320b991f202aa5888a8b929a1c87e30b_1440w.jpg">
-<meta property="og:image" content="https://pic2.zhimg.com/v2-b96f1ff5f73a5f98930da1afdb056365_1440w.jpg">
-<meta property="og:image" content="https://pic3.zhimg.com/v2-c5633a5d7e5f915ec19724f7d6c9cd70_1440w.jpg">
-<meta property="og:image" content="https://picx.zhimg.com/v2-c653d4b84b983500c8523994b44eebd7_1440w.jpg">
-<meta property="og:image" content="https://pic4.zhimg.com/v2-5c496686e686c810d9a799ec94bc00a5_1440w.jpg">
-<meta property="og:image" content="https://pic3.zhimg.com/v2-abfc4f6fb1706fc07dc71594492ffa64_1440w.jpg">
-<meta property="og:image" content="https://pica.zhimg.com/v2-17869cb55a7d7d504cbe0a29d3e748ba_1440w.jpg">
-<meta property="og:image" content="https://pic4.zhimg.com/v2-004a221cac433f1dd188ee767ad5f199_1440w.jpg">
-<meta property="og:image" content="https://pic4.zhimg.com/v2-1ecd64aaf75541a338f9236f0390941d_1440w.jpg">
-<meta property="og:image" content="https://pic4.zhimg.com/v2-2ac3ab4b9c6e9404afca7079b75aca37_1440w.jpg">
-<meta property="og:image" content="https://pic1.zhimg.com/v2-beb0479a664bfb53872f48488cea9488_1440w.jpg">
-<meta property="og:image" content="https://picx.zhimg.com/v2-a6ee12eb3b12939e8abfbcd2a6956b8b_1440w.jpg">
-<meta property="og:image" content="https://pic2.zhimg.com/v2-1d55b77b5ced5306520bae023c0fec65_1440w.jpg">
-<meta property="article:published_time" content="2026-01-28T02:46:21.000Z">
-<meta property="article:modified_time" content="2026-01-28T03:34:20.645Z">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/55ab0d8530f9242e5a45627071e4df75.jpeg">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/67827e4bf254c09f49e5f3a425f375e7.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/307aed64f93ed109c332ab0edf6920fb.jpeg">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/4991b9189f16ab8a2b64ccf97cf9dda6.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/e24916954c52db48db4b38103455b009.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/15a77f46fec7f62c8b72746e1bfbe650.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/01412ee75a66c9b9da30c32cb287252b.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/f42aa1188848b97aec31209f67591451.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/691c7535bb409f77b779c2a86a4c4c1b.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/8a93fade129b2f678336f3a81be23484.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/68d6fc66f47e7bc00fdf5bb0df4f057a.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/25fd7bc785a973d76eb76d725ea18754.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/433fce1ece21483a537799cbd2373135.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/6d881042f8a86709db162f2563592022.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/6b01449822a84b30a8129b717291fb44.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/d30987d50f1b70dcad496e57e99e4965.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/e942c9b3832c21009547a51989564fe5.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/892eedb370cd6aa795da9384a85b655b.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/99ed78b71e2911d55cbf360d30b44ffa.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/08442590bf66bdc6ddc6cfe131d4431c.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/afe0838ba1543a6726a4c6bac7d35f92.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/9d4a99fffbcc2c49946d64686a5fad94.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/03e5fb48e15ed8e3c033b70175abdb23.png">
+<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/5b14a54d093b9df9954522a4d51f5c42.png">
+<meta property="article:published_time" content="2026-02-03T02:09:14.000Z">
+<meta property="article:modified_time" content="2026-02-03T04:10:17.928Z">
 <meta property="article:author" content="Belle">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic1.zhimg.com/70/v2-d0dba843b747691404eb4953c51790d6_1440w.avis?source=172ae18b&biz_tag=Post">
+<meta name="twitter:image" content="https://xcrylu.github.io/blogs/2026/02/03/img/55ab0d8530f9242e5a45627071e4df75.jpeg">
   
   
   
-  <title>MOSFET结构及其工作原理详解 - 小蜂巢</title>
+  <title>Flash基本原理 - 小蜂巢</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +224,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="MOSFET结构及其工作原理详解"></span>
+            <span id="subtitle" data-typed-text="Flash基本原理"></span>
           
         </div>
 
@@ -225,8 +235,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-01-28 10:46" pubdate>
-          2026年1月28日 上午
+        <time datetime="2026-02-03 10:09" pubdate>
+          2026年2月3日 上午
         </time>
       </span>
     
@@ -237,7 +247,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.8k 字
         
       </span>
     
@@ -248,7 +258,7 @@
         
         
         
-          13 分钟
+          16 分钟
         
       </span>
     
@@ -285,65 +295,115 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">MOSFET结构及其工作原理详解</h1>
+            <h1 id="seo-header">Flash基本原理</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="mosfet结构及其工作原理详解">MOSFET结构及其工作原理详解</h1>
-<p><strong>摘自：</strong> https://zhuanlan.zhihu.com/p/462392639 ​</p>
-<p><img src="https://pic1.zhimg.com/70/v2-d0dba843b747691404eb4953c51790d6_1440w.avis?source=172ae18b&biz_tag=Post" srcset="/blogs/img/loading.gif" lazyload alt="半导体结构示意图"></p>
-<h2 id="mosfet基本概述">MOSFET基本概述</h2>
-<p>MOSFET由MOS(Metal Oxide Semiconductor金属氧化物半导体)+FET(Field
-Effect
-Transistor场效应晶体管)这个两个缩写组成。即通过给金属层(M-金属铝)的栅极和隔着氧化层(O-绝缘层SiO2)的源极施加电压，产生电场的效应来控制半导体(S)导电沟道开关的场效应晶体管。由于栅极与源极、栅极与漏极之间均采用SiO2绝缘层隔离，MOSFET因此又被称为绝缘栅型场效应管。</p>
-<p>市面上大家所说的功率场效应晶体管通常指绝缘栅MOS型(Metal Oxide
-Semiconductor FET),简称功率MOSFET(Power
-MOSFET)。实际上场效应管分为结型和绝缘栅两种不同的结构。场效应管是利用输入回路的电场效应来控制输出回路电流的一种半导体器件。它仅靠半导体中的多数载流子导电，又称为单极型晶体管。结型功率场效应晶体管一般称作静电感应晶体管(Static
-Induction
-Transistor-SIT)。其特点是用栅极电压来控制漏极电流，驱动电路简单，需要的驱动功率小，开关速度快，工作频率高，热稳定性优于GTR，但其电流容量小，耐压低，一般只适用于功率不超过10kW的电力电子装置。MOSFET功率场效应晶体管，大多数用作开关和驱动器，工作于开关状态，耐压从几十伏到上千伏，工作电流可达几安培到几十安。功率MOSFET基本上都是增强型MOSFET，它具有优良的开关特性。</p>
-<h2 id="mosfet的分类">MOSFET的分类</h2>
-<p>MOSFET的种类：按导电沟道类型可分为P沟道和N沟道。按栅极电压幅值可分为：耗尽型-当栅极电压为零时漏源极之间就存在导电沟道；增强型-对于N(P)沟道器件，栅极电压大于(小于)零时才存在导电沟道，功率MOSFET主要是N沟道增强型。</p>
-<p><img src="https://picx.zhimg.com/v2-320b991f202aa5888a8b929a1c87e30b_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N 沟道增强型MOSFET结构和电器符号"></p>
-<p><img src="https://pic2.zhimg.com/v2-b96f1ff5f73a5f98930da1afdb056365_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道耗尽型MOSFET结构和电器符号"></p>
-<p><img src="https://pic3.zhimg.com/v2-c5633a5d7e5f915ec19724f7d6c9cd70_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="P沟道增强型MOSFET结构和电器符号"></p>
-<p><img src="https://picx.zhimg.com/v2-c653d4b84b983500c8523994b44eebd7_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="P沟道耗尽型MOSFET结构和电器符号"></p>
-<h2
-id="mos管结构原理图解以n沟道增强型为例">MOS管结构原理图解(以N沟道增强型为例)</h2>
-<p>N沟道增强型MOS管结构如图5所示。它以一块低掺杂的P型硅片为衬底，利用扩散工艺制作两个高掺杂的N+区，并引入两个电极分别为源极S(Source)和漏极D(Drain),半导体上制作一层SiO2绝缘层，再在SiO2上面制作一层金属铝Al，引出电极，作为栅极G(Gate)。通常将衬底与源极接在一起使用。这样，栅极和衬底各相当于一个极板，中间是绝缘层，形成电容。当栅-源电压变化时，将改变衬底靠近绝缘层处感应电荷的多少，从而控制漏极电流的大小。</p>
-<p><img src="https://pic4.zhimg.com/v2-5c496686e686c810d9a799ec94bc00a5_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET原理图"></p>
-<h2
-id="mos管工作原理详解n沟道增强型为例">MOS管工作原理详解(N沟道增强型为例)</h2>
+                <h1 id="flashnandflash-norflash-基本原理-整理与改写">Flash(NandFlash &amp; NorFlash) 基本原理 — 整理与改写</h1>
+<blockquote>
+<p>引用来源：AMDDMA，原文链接：https://blog.csdn.net/AMDDMA/article/details/99349860</p>
+<p>说明：本文为对原文的整理与改写，保留原文的标题层次并列出可获取的图片链接与参考资料；正文为改写版以避免逐字复制。</p>
+</blockquote>
+<hr />
+<h2 id="一flash-基本原理及分类">一、Flash 基本原理及分类</h2>
+<h3 id="基本存储单元">1.1 基本存储单元</h3>
+<p>Flash 的基本存储单元是以浮栅（floating-gate）结构实现的场效应管。电子可以被注入或释放到浮栅上，使得晶体管的阈值电压发生可测量的偏移，从而表示不同的存储状态。读写操作通过控制栅极和源/漏极的电压来改变或检测浮栅上的电荷量。</p>
+<p><img src="../img/55ab0d8530f9242e5a45627071e4df75.jpeg" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图1.1：浮栅场效应管结构示意</p>
+<p><img src="../img/67827e4bf254c09f49e5f3a425f375e7.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图1.2：存储单元读写数据过程</p>
+<h3 id="存储颗粒分类">1.2 存储颗粒分类</h3>
+<p>根据每个单元能表示的电平，常见颗粒类型有 SLC、MLC、TLC、QLC 等。SLC 每单元表示 1 bit（2 个电平），MLC 表示 2 bit（4 个电平），TLC 表示 3 bit（8 个电平），QLC 表示 4 bit（16 个电平）。随着位数增加，单元密度与容量上升但可靠性、耐久性和读写噪声容限会下降。</p>
+<p><img src="../img/307aed64f93ed109c332ab0edf6920fb.jpeg" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图1.3：不同颗粒的存储密度</p>
+<p>实现上还分为二维（2D）与三维（3D）结构：2D 在早期更常见，3D（叠层）技术在高密度颗粒（如 TLC）中广泛应用，以提高容量和降低成本。</p>
+<p><img src="../img/4991b9189f16ab8a2b64ccf97cf9dda6.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图1.8：2D 结构技术示意图</p>
+<p><img src="../img/e24916954c52db48db4b38103455b009.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图1.9：3D 内部构造</p>
+<p><img src="../img/15a77f46fec7f62c8b72746e1bfbe650.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图1.10：NandFlash 的内部构造图</p>
+<h3 id="flash-存储分类">1.3 Flash 存储分类</h3>
+<p>按阵列与访问方式，常把 Flash 分为 NAND 与 NOR 两类。NOR 结构支持按地址随机读取，类似存储器接口，适合存放代码；NAND 以高密度、页/块为单位的读写/擦除为特征，适合大容量数据存储（如 SSD、eMMC、UFS、SD 卡等）。</p>
+<p><img src="../img/01412ee75a66c9b9da30c32cb287252b.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图1.11：NandFlash 存储单元阵列</p>
+<p><img src="../img/f42aa1188848b97aec31209f67591451.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图1.12：NorFlash 存储单元阵列</p>
+<p>写入/擦除机理上，NOR 常用热电子注入，NAND 主要依靠 F–N 隧道效应来转移浮栅电荷；两者在具体电压与时序上有差异。</p>
+<p>（原文图示：NAND 与 NOR 的阵列表征 — 图1.11 / 图1.12）</p>
+<h3 id="nand-与-nor-的异同">1.4 NAND 与 NOR 的异同</h3>
 <ul>
-<li><p>当栅-源之间不加电压时即<strong>VGS=0</strong>时，源漏之间是<strong>两只背向的PN结</strong>。不管VDS极性如何，其中总有<strong>一个PN结反偏</strong>，所以<strong>不存在</strong>导电沟道。</p></li>
-<li><p>当<strong>UDS=0且UGS&gt;0</strong>时，由于<span
-class="math inline">\(SiO_2\)</span>的存在，栅极<strong>电流为零</strong>。但是栅极金属层将<strong>聚集正电荷</strong>．它们<strong>排斥</strong>P型衬底靠近
-SiO2一侧的<strong>空穴</strong>，使之剩下不能移动的<strong>负离子区</strong>，形成<strong>耗尽层</strong>，如图6所示
-<img src="https://pic3.zhimg.com/v2-abfc4f6fb1706fc07dc71594492ffa64_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET原理图"></p></li>
-<li><p>当<strong>UGS增大</strong>时，一方面<strong>耗尽层增宽</strong>，另一方面将衬底的<strong>自由电子</strong>吸引到<strong>耗尽层与绝缘层之间</strong>，形成一个<strong>N型薄层</strong>，称为<strong>反型层</strong>，如图7所示。这个反型层就构成了漏-源之间的<strong>导电沟道</strong>。使沟道刚刚形成的栅-源电压称为<strong>开启电压UGS(th)/VT</strong>。<strong>UGS电压越大</strong>，形成的<strong>反层型越厚</strong>，导电沟道<strong>电阻越小</strong>。</p></li>
+<li>NAND：高密度、以块/页管理、适合大量数据存储，需要坏块管理、ECC、磨损均衡等；常见于 SSD、eMMC、UFS。</li>
+<li>NOR：支持随机字节访问、可靠性高、适合存放可执行代码，但容量与擦写次数限制使其不适合大容量数据存储。</li>
 </ul>
-<p><img src="https://pica.zhimg.com/v2-17869cb55a7d7d504cbe0a29d3e748ba_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET原理图"></p>
+<p>在系统设计中，二者按场景选型：NOR 用于存放启动代码/固件，NAND 用于数据存储与大容量介质。</p>
+<p><img src="../img/691c7535bb409f77b779c2a86a4c4c1b.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图1.13：Flash 芯片内部组织</p>
+<h2 id="二flash-的硬件电气特性">二、Flash 的硬件电气特性</h2>
+<h3 id="芯片封装类型">2.1 芯片封装类型</h3>
+<p>Flash 芯片有多种封装（TSOP/WSOP、BGA/LGA、SOP 等），并且可提供 8-bit、16-bit 等不同的数据通道宽度。封装决定引脚排列、引脚定义与物理尺寸，实际设计需参照器件的数据手册。</p>
+<p><img src="../img/8a93fade129b2f678336f3a81be23484.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图2.1：8 通道 TSOP/WSOP 封装引脚定义</p>
+<p><img src="../img/68d6fc66f47e7bc00fdf5bb0df4f057a.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图2.2：16 通道 TSOP/WSOP 封装引脚定义</p>
+<p><img src="../img/25fd7bc785a973d76eb76d725ea18754.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图2.3：8 通道 LGA 封装引脚定义</p>
+<p><img src="../img/433fce1ece21483a537799cbd2373135.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图2.4：16 通道 LGA 封装引脚定义</p>
+<p><img src="../img/6d881042f8a86709db162f2563592022.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图2.5：LGA-52 封装尺寸</p>
+<p><img src="../img/6b01449822a84b30a8129b717291fb44.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图2.6：48 引脚及 44 引脚 NorFlash 定义</p>
+<p><img src="../img/d30987d50f1b70dcad496e57e99e4965.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图2.7：SPI 接口 NorFlash TOP 封装引脚定义</p>
+<p><img src="../img/e942c9b3832c21009547a51989564fe5.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图2.8：SPI 接口 NorFlash BGA 封装引脚定义</p>
+<p><img src="../img/892eedb370cd6aa795da9384a85b655b.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图2.9：SPI 接口 NorFlash BGA 封装尺寸信息</p>
+<h3 id="芯片与处理器接口">2.2 芯片与处理器接口</h3>
+<p>嵌入式处理器通常提供集成的闪存控制器（如 IFC），用于连接 NOR/NAND、SRAM/DDR 等。现代系统更多采用带控制器的存储模块（eMMC、UFS），通过标准接口与 SOC 通信；在某些平台（如特定 ARM SoC）也支持直接连接原始 NAND，但大多数移动/消费设备选用带控制器的模块以简化设计。</p>
+<p><img src="../img/99ed78b71e2911d55cbf360d30b44ffa.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图2.10：LS10* 系列处理器的 IFC 总线相关描述</p>
+<p><img src="../img/08442590bf66bdc6ddc6cfe131d4431c.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图2.11：RK3399 处理器的框图</p>
+<h3 id="flash-的读写特性">2.3 Flash 的读写特性</h3>
+<p>NOR 写入常需高压热电子注入，写速相对较慢；NAND 写入主要依赖 F–N 隧道，单次写入速度通常优于 NOR。擦除通常以块为单位（NAND）或以扇区/字节粒度（NOR）为主。实际读写命令与时序遵循厂商或 ONFI 等标准，驱动层和控制器需保证操作的原子性与出错恢复逻辑。</p>
+<p>注：在固件/驱动层需实现对编程/擦除的重试、状态检查及 ECC 校验等。</p>
+<h3 id="制造工艺">2.4 制造工艺</h3>
+<p>Flash 制程一般在几十纳米尺度（示例：28 nm 级别），工艺与单元结构直接影响可靠性、寿命和成本。制造流程包括晶圆制备、光刻、沉积与刻蚀、封装与测试等环节。</p>
+<p><img src="../img/afe0838ba1543a6726a4c6bac7d35f92.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图2.12：芯片制作流程概览</p>
+<h2 id="三软件适配与文件系统">三、软件适配与文件系统</h2>
+<h3 id="文件系统">3.1 文件系统</h3>
+<p>在 Linux 等系统上，Flash 常配合专门的闪存文件系统使用，如 UBIFS、JFFS2、YAFFS 等；对于带控制器的模块（eMMC、UFS），上层可直接使用通用文件系统（ext4 等）。选择需考虑擦写粒度、写入放大、GC 与磨损均衡特性。</p>
+<p><img src="../img/9d4a99fffbcc2c49946d64686a5fad94.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图3.1：Linux 下开启对 UBIFS 的支持</p>
+<p><img src="../img/03e5fb48e15ed8e3c033b70175abdb23.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图3.2：Linux 下文件系统示意图</p>
+<p><img src="../img/5b14a54d093b9df9954522a4d51f5c42.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>图3.3：Linux 下文件系统大体目录结构</p>
+<h3 id="软件适配">3.2 软件适配</h3>
+<p>设备树（Device Tree）常用于定义 MTD 分区信息，内核驱动与用户层工具（MTD 工具箱）负责分区、读写与管理。驱动层需要提供对 ECC、坏块管理、磨损均衡等机制的支持或与控制器固件协同工作。</p>
+<h2 id="四性能对比">四、性能对比</h2>
+<p>不同颗粒（SLC/MLC/TLC/QLC）在速度、寿命、成本上的取舍决定了其适用场景：SLC 寿命与性能最好但成本最高，QLC 密度高但寿命与随机性能较差。系统级产品（如 SSD）依赖控制器在固件中实现映射表、垃圾回收、磨损平衡和 ECC 来提升整体可靠性与寿命。</p>
+<p>常见关注点包括：写入放大（write amplification）、预留空间（over-provisioning）、擦写寿命与 ECC 能力。</p>
+<h2 id="原文页面与资源说明">原文页面与资源说明</h2>
+<p>本文通过改写和本地化图片（已下载到 <code>source/img/</code>），保留了原文的结构与关键信息。原文中的所有主要示意图（图1.1~图3.3 及各封装图）已嵌入本文档中。</p>
+<p><strong>原文来源</strong>：https://blog.csdn.net/AMDDMA/article/details/99349860</p>
+<h2 id="参考资料与声明">参考资料与声明</h2>
 <ul>
-<li>当<strong>VGS&gt;VT且VDS较小</strong>时，基本MOS结构的示意图如图8-1所示。图中反型沟道层的厚度定性地表明了<strong>相对电荷密度</strong>，这时的相对电荷密度在沟道长度方向上为一<strong>常数</strong>。相应的ID-VDS特性曲线如图8-1所示。</li>
+<li>原文：AMDDMA，《Flash(NandFlash &amp; NorFlash)基本原理》，https://blog.csdn.net/AMDDMA/article/details/99349860</li>
+<li>其他参考：Open Nand Flash Interface (ONFI)、Linux MTD 与各厂商数据手册。</li>
 </ul>
-<p><img src="https://pic4.zhimg.com/v2-004a221cac433f1dd188ee767ad5f199_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET原理图"></p>
-<ul>
-<li>当<strong>VGS&gt;VT且VDS增大</strong>时，由于<strong>漏电压增大</strong>，<strong>漏端附近的氧化层压降减小</strong>，这意味着漏端附近的<strong>反型层电荷密度</strong>也将<strong>减小</strong>。漏端的<strong>沟道电导减小</strong>，从而ID-VDS特性曲线的<strong>斜率减小</strong>，如图8-2所示。</li>
-</ul>
-<p><img src="https://pic4.zhimg.com/v2-1ecd64aaf75541a338f9236f0390941d_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道耗尽型MOSFET原理图"></p>
-<ul>
-<li>当<strong>VGS&gt;VT且VDS增大</strong>到漏端的<strong>氧化层压降等于VT</strong>时，<strong>漏极</strong>处的反型层<strong>电荷密度为零</strong>，此时漏极处的<strong>电导为零</strong>，这意味着ID-VDS的特性曲线的<strong>斜率为零</strong>,称为<strong>预夹断</strong>，如图8-3所示。</li>
-</ul>
-<p><img src="https://pic4.zhimg.com/v2-2ac3ab4b9c6e9404afca7079b75aca37_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET原理图"></p>
-<ul>
-<li>当<strong>VGS&gt;VT且VDS&gt;VDS(sat)</strong>时，沟道中反型电荷为零的点移向源端。如果UDS继续<strong>增大</strong>，夹断区随之<strong>延长</strong>，如图所示，而且<strong>UDS的增大</strong>部分几乎全部用于<strong>克服</strong>夹断区对<strong>漏极电流的阻力</strong>，漏电流<strong>ID为一常数</strong>，这种情形在ID-VDS对应于<strong>饱和区(恒流区)</strong>，如图8-4所示。</li>
-</ul>
-<p><img src="https://pic1.zhimg.com/v2-beb0479a664bfb53872f48488cea9488_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET原理图"></p>
-<h2 id="mosfet的特性曲线">MOSFET的特性曲线</h2>
-<p>漏极电流ID和栅源间电压UGS的关系称为MOSFET的转移特性。ID较大时，ID与UGS的关系近似线性，曲线的斜率定义为跨导Gfs。图中随着VGS增大，ID的斜率增大。原因是由于VGS增大，形成的反层型越厚，导通沟道电阻越小，ID的增长速度越快。MOSFET有三个工作区域：截止区、饱和区和非饱和区，对应的输出特性曲线如图10所示。若电力
-MOSFET工作在开关状态，即在截止区和非饱和区之间来回转换。</p>
-<p><img src="https://picx.zhimg.com/v2-a6ee12eb3b12939e8abfbcd2a6956b8b_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET Id-Vss 转移特性曲线"></p>
-<p><img src="https://pic2.zhimg.com/v2-1d55b77b5ced5306520bae023c0fec65_1440w.jpg" srcset="/blogs/img/loading.gif" lazyload alt="N沟道增强型MOSFET Id-V_DS 输出特性曲线"></p>
+<hr />
+<p>版权声明：本文为对原文的整理与改写，引用自 AMDDMA 博文，原文遵循 CC 4.0 BY-SA 协议，转载或使用请保留原文出处。</p>
+<p>参考资料 [1]. www.PCEVA.com.cn</p>
+<p>[2]. ZOL.com.cn</p>
+<p>[3].《POWERPC IFC总线与NOR_NAND 研究》</p>
+<p>[4].《Open Nand Flash Interface》</p>
+<p>[5]. https://blog.csdn.net/lh2016rocky/article/details/70886244</p>
+<p>[6]. https://linux.cn/article-9798-1.html ———————————————— 版权声明：本文为CSDN博主「AMDDMA」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。 原文链接：https://blog.csdn.net/AMDDMA/article/details/99349860</p>
 
                 
               </div>
@@ -361,8 +421,8 @@ MOSFET工作在开关状态，即在截止区和非饱和区之间来回转换�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>MOSFET结构及其工作原理详解</div>
-      <div>https://xcrylu.github.io/blogs/2026/01/28/mosfet工作原理详解/</div>
+      <div>Flash基本原理</div>
+      <div>https://xcrylu.github.io/blogs/2026/02/03/Flash基本原理/</div>
     </div>
     <div class="license-meta">
       
@@ -374,7 +434,7 @@ MOSFET工作在开关状态，即在截止区和非饱和区之间来回转换�
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年1月28日</div>
+          <div>2026年2月3日</div>
         </div>
       
       
@@ -406,18 +466,12 @@ MOSFET工作在开关状态，即在截止区和非饱和区之间来回转换�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blogs/2026/02/03/Flash%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" title="Flash基本原理">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Flash基本原理</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blogs/2024/08/30/Hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B7%BB%E5%8A%A0%E6%96%87%E6%A1%A3/" title="Hexo个人博客系统安装配置和添加文档">
-                        <span class="hidden-mobile">Hexo个人博客系统安装配置和添加文档</span>
+                      <a href="/blogs/2026/01/28/mosfet%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/" title="MOSFET结构及其工作原理详解">
+                        <span class="hidden-mobile">MOSFET结构及其工作原理详解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
