@@ -19,16 +19,17 @@
   <meta name="author" content="Belle">
   <meta name="keywords" content="">
   
-    <meta name="description" content="什么是Hexo？ Hexo 是一个快速、简洁且高效的博客框架。 Hexo 使用 Markdown（或其他标记语言）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 安装 安装 Git  Windows：下载并安装 git。 Mac：使用 Homebrew, MacPorts 或者下载 安装程序。 Linux (Ubuntu, Debian)：sudo apt-get instal">
+    <meta name="description" content="什么是Hexo？ Hexo 是一个快速、简洁且高效的博客框架。 Hexo 使用 Markdown（或其他标记语言）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 安装 安装 Git  Windows：下载并安装 git。 Mac：使用 Homebrew, MacPorts 或者下载 安装程序。 Linux (Ubuntu, Debian)：sudo apt-get insta">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo个人博客系统安装配置和添加文档">
 <meta property="og:url" content="https://xcrylu.github.io/blogs/2024/08/30/Hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E5%92%8C%E6%B7%BB%E5%8A%A0%E6%96%87%E6%A1%A3/index.html">
 <meta property="og:site_name" content="小蜂巢">
-<meta property="og:description" content="什么是Hexo？ Hexo 是一个快速、简洁且高效的博客框架。 Hexo 使用 Markdown（或其他标记语言）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 安装 安装 Git  Windows：下载并安装 git。 Mac：使用 Homebrew, MacPorts 或者下载 安装程序。 Linux (Ubuntu, Debian)：sudo apt-get instal">
+<meta property="og:description" content="什么是Hexo？ Hexo 是一个快速、简洁且高效的博客框架。 Hexo 使用 Markdown（或其他标记语言）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 安装 安装 Git  Windows：下载并安装 git。 Mac：使用 Homebrew, MacPorts 或者下载 安装程序。 Linux (Ubuntu, Debian)：sudo apt-get insta">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-30T13:56:13.324Z">
-<meta property="article:modified_time" content="2026-01-28T03:43:42.553Z">
+<meta property="article:modified_time" content="2026-02-24T14:32:30.818Z">
 <meta property="article:author" content="Belle">
+<meta property="article:tag" content="hexo教程">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -276,18 +277,22 @@
               <div class="markdown-body">
                 
                 <h2 id="什么是hexo">什么是Hexo？</h2>
-<p>Hexo 是一个快速、简洁且高效的博客框架。 Hexo 使用 Markdown（或其他标记语言）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>Hexo 是一个快速、简洁且高效的博客框架。 Hexo 使用
+Markdown（或其他标记语言）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
 <h2 id="安装">安装</h2>
 <h3 id="安装-git">安装 Git</h3>
 <ul>
 <li>Windows：下载并安装 git。</li>
 <li>Mac：使用 Homebrew, MacPorts 或者下载 安装程序。</li>
 <li>Linux (Ubuntu, Debian)：sudo apt-get install git-core</li>
-<li>Linux (Fedora, Red Hat, CentOS)：sudo yum install git-core Linux（Fedora、Red Hat、CentOS）：sudo yum install git-core</li>
+<li>Linux (Fedora, Red Hat, CentOS)：sudo yum install git-core
+Linux（Fedora、Red Hat、CentOS）：sudo yum install git-core</li>
 </ul>
 <blockquote>
 <p>Mac 用户</p>
-如果在编译时可能会遇到问题。 请先到 App Store 安装 Xcode。 Xcode 完成后，启动并进入 Preferences -&gt; Download -&gt; Command Line Tools -&gt; Install 安装命令行工具。
+如果在编译时可能会遇到问题。 请先到 App Store 安装 Xcode。 Xcode
+完成后，启动并进入 Preferences -&gt; Download -&gt; Command Line Tools
+-&gt; Install 安装命令行工具。
 </blockquote>
 <h3 id="安装-node.js">安装 Node.js</h3>
 <p>Node.js 为大多数平台提供了官方的 安装程序。</p>
@@ -296,8 +301,10 @@
 <li>Windows：通过 nvs（推荐）或者 nvm 安装.</li>
 <li>Mac：使用 Homebrew 或 MacPorts 安装。</li>
 <li>Linux（DEB/RPM-based）：从 NodeSource 安装。</li>
-<li>其它：使用相应的软件包管理器进行安装。 可以参考由 Node.js 提供的 指导。</li>
-<li>对于 Mac 和 Linux 同样建议使用 nvs 或者 nvm，以避免可能会出现的权限问题。</li>
+<li>其它：使用相应的软件包管理器进行安装。 可以参考由 Node.js 提供的
+指导。</li>
+<li>对于 Mac 和 Linux 同样建议使用 nvs 或者
+nvm，以避免可能会出现的权限问题。</li>
 </ul>
 <blockquote>
 <p>Windows</p>
@@ -305,42 +312,55 @@
 </blockquote>
 <blockquote>
 <p>Mac / Linux</p>
-如果在尝试安装 Hexo 的过程中出现 EACCES 权限错误，请遵循 由 npmjs 发布的指导 修复该问题。
+如果在尝试安装 Hexo 的过程中出现 EACCES 权限错误，请遵循 由 npmjs
+发布的指导 修复该问题。
 </blockquote>
 <blockquote>
 <p>Linux</p>
-如果您使用 Snap 来安装 Node.js，在 初始化 博客时您可能需要手动在目标文件夹中执行 npm install。
+如果您使用 Snap 来安装 Node.js，在 初始化
+博客时您可能需要手动在目标文件夹中执行 npm install。
 </blockquote>
 <h3 id="安装-hexo">安装 Hexo</h3>
-<p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ npm install -g hexo-cli<br></code></pre></td></tr></table></figure> 进阶安装和使用 对于熟悉 npm 的进阶用户，可以仅局部安装 hexo 包。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ npm install hexo<br></code></pre></td></tr></table></figure> 安装以后，可以使用以下两种方式执行 Hexo：</p>
+<p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ npm install -g hexo-cli<br></code></pre></td></tr></table></figure>
+进阶安装和使用 对于熟悉 npm 的进阶用户，可以仅局部安装 hexo 包。
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ npm install hexo<br></code></pre></td></tr></table></figure> 安装以后，可以使用以下两种方式执行 Hexo：</p>
 <ol type="1">
 <li><p>npx hexo <command></p></li>
-<li><p>Linux 用户可以将 Hexo 所在的目录下的 node_modules 添加到环境变量之中即可直接使用 hexo <command>： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;PATH=&quot;$PATH:./node_modules/.bin&quot;&#x27;</span> &gt;&gt; ~/.profile<br></code></pre></td></tr></table></figure> 安装 Hexo 只需几分钟时间，若您在安装过程中遇到问题或无法找到解决方式，请 提交问题，我们会尽力解决您的问题。</p></li>
+<li><p>Linux 用户可以将 Hexo 所在的目录下的 node_modules
+添加到环境变量之中即可直接使用 hexo <command>： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;PATH=&quot;$PATH:./node_modules/.bin&quot;&#x27;</span> &gt;&gt; ~/.profile<br></code></pre></td></tr></table></figure> 安装 Hexo
+只需几分钟时间，若您在安装过程中遇到问题或无法找到解决方式，请
+提交问题，我们会尽力解决您的问题。</p></li>
 </ol>
 <h2 id="quick-start">Quick Start</h2>
 <h3 id="create-a-new-post">Create a new post</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<p>More info: <a
+target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
 <h3 id="run-server">Run server</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
 <h3 id="generate-static-files">Generate static files</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<p>More info: <a
+target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
 <h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>More info: <a
+target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 <h3 id="修改主题">修改主题</h3>
 <p>安装flexid主题</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ npm install --save hexo-theme-fluid <br></code></pre></td></tr></table></figure>
-<p>然后在博客目录下创建 _config.fluid.yml，将主题的 <a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">_config.yml</a>内容复制过去。</p>
+<p>然后在博客目录下创建 _config.fluid.yml，将主题的 <a
+target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">_config.yml</a>内容复制过去。</p>
 <h3 id="指定主题">指定主题</h3>
 <p>如下修改 Hexo 博客目录中的 _config.yml：</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">theme:</span> <span class="hljs-string">fluid</span>  <span class="hljs-comment"># 指定主题</span><br><span class="hljs-attr">language:</span> <span class="hljs-string">zh-CN</span>  <span class="hljs-comment"># 指定语言，会影响主题显示的语言，按需修改</span><br></code></pre></td></tr></table></figure>
 <h3 id="发布文章">发布文章</h3>
 <p>进入博客所在目录，右键打开 Git Bash Here，创建博文：</p>
-<p>hexo new "My New Post" 然后 source 文件夹中会出现一个 My New Post.md 文件，就可以使用 Markdown 编辑器在该文件中撰写文章了。</p>
-<p>写完后运行下面代码将文章渲染并部署到 GitHub Pages 上完成发布。以后每次发布文章都是这两条命令。</p>
+<p>hexo new "My New Post" 然后 source 文件夹中会出现一个 My New Post.md
+文件，就可以使用 Markdown 编辑器在该文件中撰写文章了。</p>
+<p>写完后运行下面代码将文章渲染并部署到 GitHub Pages
+上完成发布。以后每次发布文章都是这两条命令。</p>
 <p>hexo g # 生成页面 hexo d # 部署发布</p>
 <h3 id="hexo-常用命令">hexo 常用命令</h3>
 <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs axapta">hexo <span class="hljs-keyword">new</span> <span class="hljs-string">&quot;name&quot;</span>       <span class="hljs-meta"># 新建文章</span><br>hexo <span class="hljs-keyword">new</span> page <span class="hljs-string">&quot;name&quot;</span>  <span class="hljs-meta"># 新建页面</span><br>hexo g                <span class="hljs-meta"># 生成页面</span><br>hexo d                <span class="hljs-meta"># 部署</span><br>hexo g -d             <span class="hljs-meta"># 生成页面并部署</span><br>hexo s                <span class="hljs-meta"># 本地预览</span><br>hexo clean            <span class="hljs-meta"># 清除缓存和已生成的静态文件</span><br>hexo help             <span class="hljs-meta"># 帮助</span><br></code></pre></td></tr></table></figure>
@@ -348,9 +368,12 @@
 <ol type="1">
 <li>Hexo 设置显示文章摘要，首页不显示全文</li>
 </ol>
-<p>Hexo 主页文章列表默认会显示文章全文，浏览时很不方便，可以在文章中插入 <span id="more"></span> 进行分段。</p>
-<p>该代码前面的内容会作为摘要显示，而后面的内容会替换为 “Read More” 隐藏起来。 2. 设置网站图标</p>
-<p>进入 themes/主题 文件夹，打开 _config.yml 配置文件，找到 favicon 修改，一般格式为：favicon: 图标地址。（不同主题可能略有差别）</p>
+<p>Hexo 主页文章列表默认会显示文章全文，浏览时很不方便，可以在文章中插入
+<span id="more"></span> 进行分段。</p>
+<p>该代码前面的内容会作为摘要显示，而后面的内容会替换为 “Read More”
+隐藏起来。 2. 设置网站图标</p>
+<p>进入 themes/主题 文件夹，打开 _config.yml 配置文件，找到 favicon
+修改，一般格式为：favicon: 图标地址。（不同主题可能略有差别）</p>
 <ol start="3" type="1">
 <li>修改并部署后没有效果</li>
 </ol>
@@ -367,6 +390,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blogs/tags/hexo%E6%95%99%E7%A8%8B/" class="print-no-link">#hexo教程</a>
+      
+    </div>
   
 </div>
 
