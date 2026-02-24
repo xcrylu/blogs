@@ -28,13 +28,14 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-4.webp">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image.webp">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/0696fc3103624395ec8efb158d0cf3c8.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-5.webp">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-6.webp">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-1.webp">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-2.webp">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-3.webp">
 <meta property="article:published_time" content="2026-02-24T01:36:15.000Z">
-<meta property="article:modified_time" content="2026-02-24T03:01:50.708Z">
+<meta property="article:modified_time" content="2026-02-24T14:10:39.021Z">
 <meta property="article:author" content="Belle">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-4.webp">
@@ -241,7 +242,7 @@
         
         
         
-          15 分钟
+          16 分钟
         
       </span>
     
@@ -366,11 +367,19 @@
 </tr>
 </tbody>
 </table>
-<p>示例： 1) 数据记录： <img src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-5.webp" srcset="/blogs/img/loading.gif" lazyload /> <strong>- 0c:</strong> 数据大小12字节。</p>
+<p>示例：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/0696fc3103624395ec8efb158d0cf3c8.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<ol type="1">
+<li><p>数据记录 00： <img src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-5.webp" srcset="/blogs/img/loading.gif" lazyload /> <strong>- 0c:</strong> 数据大小12字节。</p>
 <p><strong>- 0898：</strong> 数据起始地址（即数据载入到内存地址）。</p>
 <p><strong>- 00：</strong> 记录类型：数据。</p>
 <p><strong>- 787FE4F6D8FD75810B020888：</strong> 数据内容，一hex格式数据，共12字节（连个hex字符表示1字节 二进制数据）。</p>
-<p><strong>- 1B:</strong> 校验和 1) 文件结束记录： <img src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-6.webp" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p><strong>- 1B:</strong> 校验和</p></li>
+<li><p>文件结束记录 01：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-6.webp" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>代表HEX文件结束，其后不跟数据，仅包含校验和。</p></li>
+<li><p>程序入口地址 05: 其数据域的内容在本例中为0x01010400,该地址通常为MCU的复位向量地址，该地址在编译时由工程的链接脚本决定。</p></li>
+</ol>
 <h2 id="四地址计算示例与注意事项">四、地址计算示例与注意事项</h2>
 <ol type="1">
 <li>使用扩展段地址（02）时：</li>
