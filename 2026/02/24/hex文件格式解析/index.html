@@ -26,18 +26,18 @@
 <meta property="og:site_name" content="小蜂巢">
 <meta property="og:description" content="HEX 文件格式解析 本文介绍 Intel HEX 与 BIN 的基本差异，详细说明 Intel HEX 文件格式与常见记录类型，并给出示例与地址计算说明，方便嵌入式固件解析与烧录使用。 一、BIN 与 HEX 简介  BIN：二进制文件，直接包含机器码或固件数据，通常用于直接写入存储器或加载到内存执行。BIN 文件不包含地址信息，烧录时需手动指定目标地址。 HEX：Intel HEX（">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/24/hex%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90/image-4.png">
-<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/24/hex%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90/image.png">
-<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/24/hex%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90/image-5.png">
-<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/24/hex%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90/image-6.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-4.webp">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image.webp">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-5.webp">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-6.webp">
 <meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/24/hex%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90/image-1.png">
-<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/24/hex%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90/image-2.png">
-<meta property="og:image" content="https://xcrylu.github.io/blogs/2026/02/24/hex%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90/image-3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-2.webp">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-3.webp">
 <meta property="article:published_time" content="2026-02-24T01:36:15.000Z">
-<meta property="article:modified_time" content="2026-02-24T02:40:06.630Z">
+<meta property="article:modified_time" content="2026-02-24T02:58:15.189Z">
 <meta property="article:author" content="Belle">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://xcrylu.github.io/blogs/2026/02/24/hex%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90/image-4.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-4.webp">
   
   
   
@@ -298,7 +298,7 @@
 </ul>
 <h2 id="二intel-hex-文件行格式">二、Intel HEX 文件行格式</h2>
 <p>每一行（record）格式为：</p>
-<p><img src="image-4.png" srcset="/blogs/img/loading.gif" lazyload alt="alt text" /> <strong>即：</strong> <code>:LLAAAATT[DD..DD]CC</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-4.webp" srcset="/blogs/img/loading.gif" lazyload /> <strong>即：</strong> <code>:LLAAAATT[DD..DD]CC</code></p>
 <p>说明：</p>
 <ul>
 <li><code>:</code>：行起始字符</li>
@@ -315,9 +315,7 @@
 <li><code>CC</code>：校验和（Checksum），计算方法为对从 <code>LL</code> 到数据字段最后一个字节的所有字节求和，取低 8 位，然后取二补数（即 0x100 - (sum &amp; 0xFF)）</li>
 </ul>
 <p>示例（常见行）：</p>
-<figure>
-<img src="image.png" srcset="/blogs/img/loading.gif" lazyload alt="alt text" /><figcaption aria-hidden="true">alt text</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image.webp" srcset="/blogs/img/loading.gif" lazyload /></p>
 <h2 id="三常见记录类型说明">三、常见记录类型说明</h2>
 <table>
 
@@ -368,7 +366,7 @@
 </tr>
 </tbody>
 </table>
-<p>示例： 1) 数据记录： <img src="image-5.png" srcset="/blogs/img/loading.gif" lazyload alt="alt text" /> <strong>- 0c:</strong> 数据大小12字节。 <strong>-0898：</strong> 数据起始地址（即数据载入到内存地址）。 <strong>- 00：</strong> 记录类型：数据。 <strong>- 787FE4F6D8FD75810B020888：</strong> 数据内容，一hex格式数据，共12字节（连个hex字符表示1字节二进制数据）。 <strong>- 1B:</strong> 校验和 1) 文件结束记录： <img src="image-6.png" srcset="/blogs/img/loading.gif" lazyload alt="alt text" /></p>
+<p>示例： 1) 数据记录： <img src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-5.webp" srcset="/blogs/img/loading.gif" lazyload /> <strong>- 0c:</strong> 数据大小12字节。 <strong>-0898：</strong> 数据起始地址（即数据载入到内存地址）。 <strong>- 00：</strong> 记录类型：数据。 <strong>- 787FE4F6D8FD75810B020888：</strong> 数据内容，一hex格式数据，共12字节（连个hex字符表示1字节二进制数据）。 <strong>- 1B:</strong> 校验和 1) 文件结束记录： <img src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-6.webp" srcset="/blogs/img/loading.gif" lazyload /></p>
 <h2 id="四地址计算示例与注意事项">四、地址计算示例与注意事项</h2>
 <ol type="1">
 <li>使用扩展段地址（02）时：</li>
@@ -385,7 +383,7 @@
 <ol start="2" type="1">
 <li>使用扩展线性地址（04）时：</li>
 </ol>
-<p>示例： <img src="image-2.png" srcset="/blogs/img/loading.gif" lazyload alt="alt text" /></p>
+<p>示例： <img src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-2.webp" srcset="/blogs/img/loading.gif" lazyload /></p>
 <ul>
 <li>第一行 <code>:020000040001F9</code> 表示扩展线性地址 <code>0x0001</code>。</li>
 <li>基址 = 0x0001 &lt;&lt; 16 = 0x00010000。</li>
@@ -401,9 +399,7 @@
 </ul>
 <h2 id="五示例对比两组记录">五、示例对比（两组记录）</h2>
 <p>下面两组记录分别使用 02 和 04，但都定位到相同绝对地址：</p>
-<figure>
-<img src="image-3.png" srcset="/blogs/img/loading.gif" lazyload alt="alt text" /><figcaption aria-hidden="true">alt text</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-3.webp" srcset="/blogs/img/loading.gif" lazyload /></p>
 <ul>
 <li>使用 02 时，扩展段地址为 0x1000 → 基址 = 0x1000 &lt;&lt; 4 = 0x10000；数据起始偏移 0x0000 → 绝对地址 0x10000。</li>
 <li>使用 04 时，扩展线性地址为 0x0001 → 基址 = 0x0001 &lt;&lt; 16 = 0x10000；数据起始偏移 0x0000 → 绝对地址 0x10000。</li>
