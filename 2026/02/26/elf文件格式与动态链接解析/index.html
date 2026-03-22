@@ -1,0 +1,853 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN,zh-TW,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/blogs/img/fluid.png">
+  <link rel="icon" href="/blogs/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Belle">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="ELF文件件格式与动态链接解析 PART1 ELF文件格式 ELF代表Executable and Linkable Forma，是一种对可执行文件、目标文件和库使用的文件格式，ELF格式是是UNIX系统实验室作为ABI（Application Binary Interface）而开发和发布的，是Linux系统的标准文件格式了。与Windows下的PE文件格式类似。 本文使用如下的简单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="elf文件格式与动态链接解析">
+<meta property="og:url" content="https://xcrylu.github.io/blogs/2026/02/26/elf%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="小蜂巢">
+<meta property="og:description" content="ELF文件件格式与动态链接解析 PART1 ELF文件格式 ELF代表Executable and Linkable Forma，是一种对可执行文件、目标文件和库使用的文件格式，ELF格式是是UNIX系统实验室作为ABI（Application Binary Interface）而开发和发布的，是Linux系统的标准文件格式了。与Windows下的PE文件格式类似。 本文使用如下的简单">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-26T11:23:07.000Z">
+<meta property="article:modified_time" content="2026-02-27T15:24:15.537Z">
+<meta property="article:author" content="Belle">
+<meta property="article:tag" content="嵌入式">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>elf文件格式与动态链接解析 - 小蜂巢</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/blogs/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blogs/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blogs/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xcrylu.github.io","root":"/blogs/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/blogs/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blogs/js/utils.js" ></script>
+  <script  src="/blogs/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blogs/">
+      <strong>小蜂巢</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blogs/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blogs/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blogs/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blogs/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blogs/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blogs/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="elf文件格式与动态链接解析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-26 19:23" pubdate>
+          2026年2月26日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">elf文件格式与动态链接解析</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="elf文件件格式与动态链接解析">ELF文件件格式与动态链接解析</h1>
+<h2 id="part1-elf文件格式">PART1 ELF文件格式</h2>
+<p>ELF代表Executable and Linkable
+Forma，是一种对可执行文件、目标文件和库使用的文件格式，ELF格式是是UNIX系统实验室作为ABI（Application
+Binary
+Interface）而开发和发布的，是Linux系统的标准文件格式了。与Windows下的PE文件格式类似。
+本文使用如下的简单程序来具体讲述ELF文件的格式，建议对照着程序的二进制码阅读本文。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// elfExample.c</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-type">const</span> <span class="hljs-type">char</span>* const_str = <span class="hljs-string">&quot;ELF Example&quot;</span>;<br><br><span class="hljs-type">int</span> g_initVar = <span class="hljs-number">1024</span>;<br><span class="hljs-type">int</span> g_uinitVar;<br><br><span class="hljs-type">static</span> <span class="hljs-type">int</span> s_initVar = <span class="hljs-number">8</span>;<br><span class="hljs-type">static</span> <span class="hljs-type">int</span> s_uinitVar;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">myPrint</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;const_str: %s\n&quot;</span>,const_str);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;g_initVar: %d\n&quot;</span>,g_initVar);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;s_initVar: %d\n&quot;</span>,s_initVar);<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-type">int</span> tmp_var = <span class="hljs-number">10</span>;<br><br>	myPrint();<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="一.-elf概述">一. ELF概述</h3>
+<p>ELF主要包括三种类型文件：</p>
+<ul>
+<li>可重定位文件(relocatable)：编译器和汇编器产生的.o文件，被Linker所处理</li>
+<li>可执行文件(executable)：Linker对.o文件进行处理输出的文件，进程映像</li>
+<li>共享对象文件(shared object)：动态库文件.so</li>
+</ul>
+<p>下面是三种类型的示例:</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image.png" srcset="/blogs/img/loading.gif" lazyload
+alt="图1. 可重定位文件" /> <img
+src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-1.png" srcset="/blogs/img/loading.gif" lazyload
+alt="图2. 可执行文件" /> <img
+src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-2.png" srcset="/blogs/img/loading.gif" lazyload
+alt="图3. 共享对象文件" /></p>
+<p><strong>ELF文件布局</strong> ELF文件包括了5个部分：</p>
+<ul>
+<li><p>ELF header，描述体系结构和操作系统等基本信息，指出section header
+table和program header table在文件的位置</p></li>
+<li><p>program header
+table，这个是从运行的角度来看ELF文件的，主要给出了各个segment的信息，在汇编和链接过程中没用</p></li>
+<li><p>section header
+table，这个保存了所有的section的信息，这是从编译和链接的角度来看ELF文件的</p></li>
+<li><p>sections，就是各个节区</p></li>
+<li><p>segments，就是在运行时的各个段</p></li>
+</ul>
+<p>ELF布局图： <img
+src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-3.png" srcset="/blogs/img/loading.gif" lazyload
+alt="ELF文件布局" /></p>
+<p>由图可以知道，其实sections和segments占的一样的地方。这是从链接和加载的角度来讲的。左边是链接视图，右边是加载视图，sections是程序员可见的，是给链接器使用的概念，而segments是程序员不可见的，是给加载器使用的概念。一般是一个segment包含多个section。Windows的PE就没有这个program
+header table和section header
+table点都统一为section，只是在加载时会进行处理。所以program header
+table和section header table都是可选的。</p>
+<h3 id="二.-elf的组成结构">二. ELF的组成结构</h3>
+<h4 id="elf-header">(1) ELF header</h4>
+<p>ELF Header描述了体系结构和操作系统等基本信息,并指出Section Header
+Table和Program Header Table在文件中的什么位置，每个成员的解释参见注释。
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> EI_NIDENT 16</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span>&#123;</span><br>    <span class="hljs-comment">/*ELF的一些标识信息，固定值*/</span><br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> e_ident[EI_NIDENT];<br>    <span class="hljs-comment">/*目标文件类型：1-可重定位文件，2-可执行文件，3-共享目标文件等*/</span><br>    Elf32_Half e_type;<br>    <span class="hljs-comment">/*文件的目标体系结构类型：3-intel 80386*/</span><br>    Elf32_Half e_machine;<br>    <span class="hljs-comment">/*目标文件版本：1-当前版本*/</span><br>    Elf32_Word e_version;<br>    <span class="hljs-comment">/*程序入口的虚拟地址，如果没有入口，可为0*/</span><br>    Elf32_Addr e_entry;<br>    <span class="hljs-comment">/*程序头表(segment header table)的偏移量，如果没有，可为0*/</span><br>    Elf32_Off e_phoff;<br>    <span class="hljs-comment">/*节区头表(section header table)的偏移量，没有可为0*/</span><br>    Elf32_Off e_shoff;<br>    <span class="hljs-comment">/*与文件相关的，特定于处理器的标志*/</span><br>    Elf32_Word e_flags;<br>    <span class="hljs-comment">/*ELF头部的大小，单位字节*/</span><br>    Elf32_Half e_ehsize;<br>    <span class="hljs-comment">/*程序头表每个表项的大小，单位字节*/</span><br>    Elf32_Half e_phentsize;<br>    <span class="hljs-comment">/*程序头表表项的个数*/</span><br>    Elf32_Half e_phnum;<br>    <span class="hljs-comment">/*节区头表每个表项的大小，单位字节*/</span><br>    Elf32_Half e_shentsize;<br>    <span class="hljs-comment">/*节区头表表项的数目*/</span><br>    Elf32_Half e_shnum;<br>    <span class="hljs-comment">/*某些节区中包含固定大小的项目，如符号表。对于这类节区，此成员给出每个表项的长度字节数。*/</span><br>    Elf32_Half e_shstrndx;<br>&#125;Elf32_Ehdr;<br></code></pre></td></tr></table></figure> 为了方便参考，将上面结构体用表格形式表示如下： | 字段名 |
+数据类型 | 说明 | | :--- | :--- | :--- | | <code>e_ident</code> |
+<code>unsigned char[EI_NIDENT]</code> | ELF的一些标识信息，固定值 | |
+<code>e_type</code> | <code>Elf32_Half</code> |
+目标文件类型：1-可重定位文件，2-可执行文件，3-共享目标文件等 | |
+<code>e_machine</code> | <code>Elf32_Half</code> |
+文件的目标体系结构类型：3-intel 80386 | | <code>e_version</code> |
+<code>Elf32_Word</code> | 目标文件版本：1-当前版本 | |
+<code>e_entry</code> | <code>Elf32_Addr</code> |
+程序入口的虚拟地址，如果没有入口，可为0 | | <code>e_phoff</code> |
+<code>Elf32_Off</code> | 程序头表(segment header
+table)的偏移量，如果没有，可为0 | | <code>e_shoff</code> |
+<code>Elf32_Off</code> | 节区头表(section header
+table)的偏移量，没有可为0 | | <code>e_flags</code> |
+<code>Elf32_Word</code> | 与文件相关的，特定于处理器的标志 | |
+<code>e_ehsize</code> | <code>Elf32_Half</code> |
+ELF头部的大小，单位字节 | | <code>e_phentsize</code> |
+<code>Elf32_Half</code> | 程序头表每个表项的大小，单位字节 | |
+<code>e_phnum</code> | <code>Elf32_Half</code> | 程序头表表项的个数 | |
+<code>e_shentsize</code> | <code>Elf32_Half</code> |
+节区头表每个表项的大小，单位字节 | | <code>e_shnum</code> |
+<code>Elf32_Half</code> | 节区头表表项的数目 | | <code>e_shstrndx</code>
+| <code>Elf32_Half</code> |
+某些节区中包含固定大小的项目，如符号表。对于这类节区，此成员给出每个表项的长度字节数。
+|</p>
+<p>特别注意最后一个字段e_shstrndx的含义：“e_shstrndx”是“Section header
+string table
+index”的缩写。段表字符串表本身也是ELF文件中的一个普通的段，它的名字往往叫做“.shstrtab”。那么这个“e_shstrndx”就表示“.shstrtab”在段表中的下标，即段表字符串表在段表中的下标。</p>
+<p>下面是test的ELF header结构各个数据成员对应的值:</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-4.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>可以看到这个ELF的基本信息，比如，体系结构和操作系统，Section header
+table中有30个section，从4420开始，每个40个字节，Program header
+table中有9个segment，每个32字节。下面再从字节码上面看看具体的。标出了某些结构，可以对照上面的结构看。</p>
+<h4 id="program-header-table与grogram-header-entry">(2) program header
+table与grogram header entry</h4>
+<p>程序头表是从加载的角度来看ELF文件的，目标文件没有该表，每一个表项提供了各段在虚拟地址空间和物理地址空间的大小、位置、标志、访问权限和对其方面的信息。从上面知道，elpExample中有13个segment，如下图：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-5.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>下面对其中的一些进行简单的介绍。</p>
+<p>PHDR保存程序头表
+INTERP指定在程序已经从可执行文件映射到内存之后，必须调用的解释器。在这里，解释器并不意味着二进制文件的内容必须由另一个程序解释。它指的是这样一个程序：通过链接其他库，来满足未解决的引用。通常/lib/ld-linux.so.2、/lib/ld-linux-ia-64.so.2等库，用于在虚拟地址空间中插入程序运行所需要的动态库。对几乎所有的程序来说，可能C标准库都是必须映射的。还需要添加的各种库包括,GTK、数学库、libjpeg等等
+LOAD表示一个需要从二进制文件映射到虚拟地址空间的段。其中保存了常量数据（如字符串），程序的目标代码等。
+DYNAMIC段保存了由动态链接器（即，INTERP中指定的解释器）使用的信息。
+NOTE保存了专有信息 一个entry对应一个segment，由如下的数据结构表示</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span><br><span class="hljs-class">&#123;</span><br>    <span class="hljs-comment">/*segment的类型：PT_LOAD= 1 可加载的段*/</span><br>    Elf32_Word p_type;<br>    <span class="hljs-comment">/*从文件头到该段第一个字节的偏移*/</span><br>    Elf32_Off p_offset;<br>    <span class="hljs-comment">/*该段第一个字节被放到内存中的虚拟地址*/</span><br>    Elf32_Addr p_vaddr;<br>    <span class="hljs-comment">/*在linux中这个成员没有任何意义，值与p_vaddr相同*/</span><br>    Elf32_Addr p_paddr;<br>    <span class="hljs-comment">/*该段在文件映像中所占的字节数*/</span><br>    Elf32_Word p_filesz;<br>    <span class="hljs-comment">/*该段在内存映像中占用的字节数*/</span><br>    Elf32_Word p_memsz;<br>    <span class="hljs-comment">/*段标志*/</span><br>    Elf32_Word p_flags;<br>    <span class="hljs-comment">/*p_vaddr是否对齐*/</span><br>    Elf32_Word p_align;<br>&#125; Elf32_phdr;<br><br></code></pre></td></tr></table></figure>
+<h4 id="section-header-table与section-header-entry">(3) section header
+table与section header entry</h4>
+<p>节表头包含了文件中的各个节，每个节都指定了一个类型，定义了节数据的语义。各节都指定了大小和在二进制文件内部的偏移。从上面知道,test中有30个section，如下图：
+<img
+src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-6.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<h3 id="section-segment关系">(4) section segment关系</h3>
+<p>ELF 文件中的 Section（节）和
+Segment（段）是从不同视角看待同一个文件的方式，多个 Section
+在运行时被合并、映射，形成一个 Segment。</p>
+<p>Section 是链接时的概念，而 Segment 是运行时的概念。</p>
+<p>🔍 两种视角 | 维度 | Section (节) | Segment (段) | | :--- | :--- |
+:--- | | 视角 | 链接视图 (Linking View) | 执行视图 (Execution View) | |
+目的 | 为链接器和调试器服务，精细组织代码和数据（如 <code>.text</code>,
+<code>.data</code>, <code>.symtab</code>）。 |
+为操作系统加载器服务，定义如何将文件内容映射到内存中。 | | 使用者 |
+链接器 (<code>ld</code>)、调试器 (<code>gdb</code>) |
+操作系统内核、动态链接器 | | 生命周期 |
+主要存在于文件中，链接时使用。部分 <code>.debug</code>
+等信息在程序运行时通常被丢弃。 |
+从文件加载到内存开始，贯穿进程的整个生命周期。 | | 描述表 | 节头表
+(Section Header Table)，由 <code>e_shoff</code> 字段定位。 | 程序头表
+(Program Header Table)，由 <code>e_phoff</code> 字段定位。 |</p>
+<p>🧩 组成与映射关系</p>
+<p>一个 Segment 通常由一个或多个具有相同内存访问权限的 Section
+组成。</p>
+<p>映射过程：当操作系统加载 ELF
+文件时，它会读取程序头表，根据表中的信息，将文件中一个或多个 Section
+的内容加载到内存的同一个连续区域，并赋予相同的权限（如可读、可写、可执行），这个内存区域就是一个
+Segment。 并非所有 Section 都会被加载：只有那些具有 ALLOC（分配）属性的
+Section 才会被纳入某个 PT_LOAD 类型的 Segment 中。例如，存放符号表的
+.symtab 和调试信息的 .debug
+节通常只在链接和调试时需要，不会被加载到内存中运行，因此它们不属于任何
+Segment。 下图为elfExample文件section和segment映射关系。</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/image-8.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>如，将.interp
+.note.gnu.porpery等节合并成02段，参考上面图可知这是load段，并且权限都是只读。这些内容都是程序运行时的参考信息。
+将.init .plt .text
+.fini节合并成03段，它们的权限都是可读和可执行的代码。</p>
+<h3 id="参考资料">参考资料：</h3>
+<ol type="1">
+<li>https://www.cnblogs.com/gongxianjin/p/16906719.html</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blogs/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="print-no-link">#嵌入式</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>elf文件格式与动态链接解析</div>
+      <div>https://xcrylu.github.io/blogs/2026/02/26/elf文件格式与动态链接解析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Belle</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年2月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blogs/2026/03/22/RS485%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" title="RS485通信原理">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RS485通信原理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blogs/2026/02/24/hex%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E8%A7%A3%E6%9E%90/" title="hex文件格式解析">
+                        <span class="hidden-mobile">hex文件格式解析</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"xcrylu/blog-comments","repo-id":"R_kgDORYJlJg","category":"General","category-id":"DIC_kwDORYJlJs4C3JRe","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","loading":"lazy"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blogs/js/events.js" ></script>
+<script  src="/blogs/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/blogs/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/blogs/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blogs/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

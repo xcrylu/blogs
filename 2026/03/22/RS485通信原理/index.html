@@ -1,0 +1,853 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN,zh-TW,default" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/blogs/img/fluid.png">
+  <link rel="icon" href="/blogs/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Belle">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="RS485通信 一、简介 RS485 是美国电子工业协会（Electronic Industries Association，EIA）于1983年发布的串行通信接口标准，经通讯工业协会（TIA）修订后命名为 TIA&#x2F;EIA-485-A。 RS485 是一种工业控制环境中常用的通讯协议，其中RS 是 Recommended Standard 的缩写。 RS485 是 半双工异步 串行通信。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RS485通信原理">
+<meta property="og:url" content="https://xcrylu.github.io/blogs/2026/03/22/RS485%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="小蜂巢">
+<meta property="og:description" content="RS485通信 一、简介 RS485 是美国电子工业协会（Electronic Industries Association，EIA）于1983年发布的串行通信接口标准，经通讯工业协会（TIA）修订后命名为 TIA&#x2F;EIA-485-A。 RS485 是一种工业控制环境中常用的通讯协议，其中RS 是 Recommended Standard 的缩写。 RS485 是 半双工异步 串行通信。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-22T09:18:21.000Z">
+<meta property="article:modified_time" content="2026-03-22T10:11:48.233Z">
+<meta property="article:author" content="Belle">
+<meta property="article:tag" content="单片机">
+<meta property="article:tag" content="嵌入式">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>RS485通信原理 - 小蜂巢</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/blogs/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blogs/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blogs/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xcrylu.github.io","root":"/blogs/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/blogs/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blogs/js/utils.js" ></script>
+  <script  src="/blogs/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blogs/">
+      <strong>小蜂巢</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blogs/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blogs/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blogs/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blogs/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blogs/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blogs/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="RS485通信原理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-22 17:18" pubdate>
+          2026年3月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">RS485通信原理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="rs485通信">RS485通信</h1>
+<h2 id="一简介">一、简介</h2>
+<p>RS485 是美国电子工业协会（Electronic Industries
+Association，EIA）于1983年发布的串行通信接口标准，经通讯工业协会（TIA）修订后命名为
+TIA/EIA-485-A。 RS485 是一种工业控制环境中常用的通讯协议，其中RS 是
+Recommended Standard 的缩写。 RS485 是 半双工异步 串行通信。</p>
+<h3 id="特点">特点</h3>
+<ul>
+<li>支持多节点：一般最大支持 32 个节点。</li>
+<li>传输距离远：最远通讯距离可达1200米。</li>
+<li>抗干扰能力强：差分信号传输。</li>
+<li>连接简单：只需要两根信号线（A+和B-）就可以进行正常的通信。</li>
+</ul>
+<h3 id="差分信号传输">差分信号传输：</h3>
+<p>RS485
+通信采用差分信号传输，通常情况下只需要两根信号线就可以进行正常的通信。
+在差分信号中，逻辑0和逻辑1是用两根信号线（A+和B-）的电压差来表示。</p>
+<ul>
+<li><strong>逻辑 1</strong>：两根信号线（A+和B-）的电压差在 +2V～+6V
+之间。</li>
+<li><strong>逻辑 0</strong>：：两根信号线（A+和B-）的电压差在 -2V～-6V
+之间。</li>
+</ul>
+<h3 id="连接方式">连接方式</h3>
+<p>在 RS485 通信网络中，通常会使用 485 收发器来转换 TTL 电平和 RS485
+电平。 节点中的串口控制器使用 RX 与 TX 信号线连接到 485
+收发器上，而收发器通过差分线连接到网络总线。
+串口控制器与收发器之间一般使用 TTL
+信号传输，收发器与总线则使用差分信号来传输。 发送数据时，串口控制器的 TX
+信号经过收发器转换成差分信号传输到总线上。
+接收数据时，收发器把总线上的差分信号转化成 TTL 信号通过 RX
+引脚传输到串口控制器中。
+通常在这些节点中只能有一个主机，剩下的全为从机。
+在总线的起止端分别加了一个 120 欧的匹配电阻。</p>
+<p>具体连接图如下所示：</p>
+<!-- ![alt text](image.png) -->
+<p><img
+src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/20260322180942896.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<h2 id="二rs485收发器sp3485">二、RS485收发器（SP3485）</h2>
+<p>SP3485
+芯片是一款非常经典的+3.3V低功耗半双工RS485收发器，数据传输速率高达10Mbps。
+单片机串口通信一般是TTL电平，如果需要RS485
+通信，就需要RS485芯片在中间转换一下。RS
+因为RS485通信是半双工通信，就是发送数据的时候不能同时接收数据，所以我们选择SP3485做RS485收发器。</p>
+<h3 id="sp3485-芯片引脚">SP3485 芯片引脚</h3>
+<p>SP3485 芯片的引脚图如下所示：</p>
+<!-- ![alt text](image-1.png) -->
+<p><img
+src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/20260322181033822.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>引脚说明如下：</p>
+<table>
+<thead>
+<tr>
+<th>引脚</th>
+<th>名称</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>RO</td>
+<td>接收器输出----接RX</td>
+</tr>
+<tr>
+<td>2</td>
+<td>RE</td>
+<td>接收器输出使能（低电平-接收使能）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>DE</td>
+<td>驱动器输出使能（高电平-发送使能）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>DI</td>
+<td>驱动器输入----接TX</td>
+</tr>
+<tr>
+<td>5</td>
+<td>GND</td>
+<td>接地</td>
+</tr>
+<tr>
+<td>6</td>
+<td>A</td>
+<td>驱动器输出/接收器输入（同相）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>B</td>
+<td>驱动器输出/接收器输入（反相）</td>
+</tr>
+<tr>
+<td>8</td>
+<td>VCC</td>
+<td>芯片供电+3.3V</td>
+</tr>
+</tbody>
+</table>
+<h4 id="普通收发">普通收发</h4>
+<p>RS485 电路图如下图所示：</p>
+<!-- ![alt text](image-2.png) -->
+<p><img
+src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/20260322181102271.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<p>RS485 普通收发电路图原理：</p>
+<p>RS485_EN 为高电平，逻辑为1，发送使能，接收禁止。 RS485_EN
+为低电平，逻辑为0，发送禁止，接收使能 在编写驱动程序时：</p>
+<p>在发送数据前，给RS485_EN 置高电平。 在发送数据后，给RS485_EN
+置低电平。</p>
+<h3 id="自动收发">自动收发</h3>
+<p>如下图所示，RS485 自动收发电路比RS485
+普通收发电路增加了一个三极管开关电路，是由电阻R8、电阻R9 和 NPN三极管Q1
+组成。其中： - R9—限流电阻：最好选择4.7K，也可以选择10K。 -
+R8—上拉电阻：可以选择4.7K或者10K。 -
+Q1—NPN三极管：高电平导通，低电平截止。</p>
+<!-- ![alt text](image-3.png) -->
+<p><img
+src="https://cdn.jsdelivr.net/gh/xcrylu/BLOG-IMAGES/imges/20260322181118834.png" srcset="/blogs/img/loading.gif" lazyload /></p>
+<h5 id="自动收发工作原理"><strong>自动收发工作原理</strong></h5>
+<ul>
+<li><p><strong>接收数据</strong>
+在接收数据过程中，RS485_TX引脚一直保持高电平，NPN三极管Q1导通，RE和DE的引脚低电平，发送禁止，接收使能，进入接收状态。</p></li>
+<li><p><strong>发送数据</strong> RS485_TX 发送1，AB发送1；RS485_TX
+发送0，AB发送0。</p>
+<ul>
+<li><strong>当 RS485_TX 发送1时：</strong>
+<ul>
+<li>NPN三极管导通，RE和DE的引脚是低电平，发送禁止，接收使能，进入接收状态，SP3485芯片的AB引脚进入高阻状态，因为R4把A拉高，R5把B拉低，所以，AB传输的是1。所以，当RS485_TX发送1时，AB引脚发送1。</li>
+</ul></li>
+<li><strong>当 RS485_TX 发送0时：</strong>
+<ul>
+<li>NPN三极管不导通，RE和DE的引脚是高电平，进入发送状态，SP3485芯片会把DI上的电平反应到AB引脚上输出，因为DI已经接地，所以AB引脚会传输0。所以，当RS485_TX发送0时，AB引脚发送0。</li>
+</ul></li>
+</ul></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blogs/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" class="print-no-link">#单片机</a>
+      
+        <a href="/blogs/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="print-no-link">#嵌入式</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>RS485通信原理</div>
+      <div>https://xcrylu.github.io/blogs/2026/03/22/RS485通信原理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Belle</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blogs/2026/02/26/elf%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E4%B8%8E%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E8%A7%A3%E6%9E%90/" title="elf文件格式与动态链接解析">
+                        <span class="hidden-mobile">elf文件格式与动态链接解析</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"xcrylu/blog-comments","repo-id":"R_kgDORYJlJg","category":"General","category-id":"DIC_kwDORYJlJs4C3JRe","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","loading":"lazy"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blogs/js/events.js" ></script>
+<script  src="/blogs/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/blogs/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/blogs/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blogs/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
